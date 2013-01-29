@@ -48,7 +48,12 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".GCMIntentService" />
+        <service android:name="org.prgrmmr.hermes.GCMIntentService" />
+
+        <activity
+            android:name="org.prgrmmr.hermes.MessageActivity"
+            android:label="@string/title_activity_message" >
+        </activity>
     </application>
 
 </manifest>

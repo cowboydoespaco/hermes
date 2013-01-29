@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 			GCMRegistrar.register(this, SENDER_ID);
 		} else {
 			lblStatus.setText(regId);
-			Log.v(TAG, "Already registered");
+			Log.v(TAG, "Already registered " + regId);
 		}
 	}
 

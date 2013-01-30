@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Vibrator;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
@@ -31,6 +32,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 	        .getSystemService(Context.NOTIFICATION_SERVICE);
 	    Notification notification = prepareNotification(context, msg);
 	    manager.notify(R.id.notification_id, notification);
+	    Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+	    long[] vibratePattern = {0, 1000, 500, 1000, 500, 1000};
+	    vib.vibrate(vibratePattern, -1);
 	}
 
 	@Override

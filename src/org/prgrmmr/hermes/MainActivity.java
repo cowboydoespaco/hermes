@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 		if (regId.equals("")) {
 			GCMRegistrar.register(this, SENDER_ID);
 		} else {
-			lblStatus.setText(regId);
+			lblStatus.setText("RegID: " + regId);
 			Log.v(TAG, "Already registered " + regId);
 		}
 	}

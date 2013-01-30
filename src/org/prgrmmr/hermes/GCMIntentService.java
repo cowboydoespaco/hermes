@@ -24,8 +24,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 	@Override
 	protected void onMessage(Context context, Intent intent) {
-		Log.d(MainActivity.TAG, "Message Received: "+ intent.getStringExtra("data"));
-		String msg = intent.getStringExtra("data");
+		Log.d(MainActivity.TAG, "Message Received: "+ intent.getStringExtra("message"));
+		String msg = intent.getStringExtra("message");
 
 	    NotificationManager manager = (NotificationManager) context
 	        .getSystemService(Context.NOTIFICATION_SERVICE);

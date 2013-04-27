@@ -33,7 +33,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	    Notification notification = prepareNotification(context, msg);
 	    manager.notify(R.id.notification_id, notification);
 	    Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-	    long[] vibratePattern = {1000, 1000, 1000, 1000, 1000, 1000};
+	    long[] vibratePattern = {1000, 2000, 1000, 2000};
 	    vib.vibrate(vibratePattern, -1);
 	}
 

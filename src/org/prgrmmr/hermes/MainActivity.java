@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
 		GCMRegistrar.checkManifest(this);
 		final String regId = GCMRegistrar.getRegistrationId(this);
 		if (regId.equals("")) {
+			lblStatus.setText("Registering. Please restart the app.");
 			GCMRegistrar.register(this, SENDER_ID);
 		} else {
 			lblStatus.setText("RegID: " + regId);
@@ -36,7 +37,7 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 

@@ -5,14 +5,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="15" />
 
     <permission
         android:name="org.prgrmmr.hermes.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="org.prgrmmr.hermes.permission.C2D_MESSAGE" />
     <!-- App receives GCM messages. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -54,6 +54,13 @@
         <activity
             android:name="org.prgrmmr.hermes.MessageActivity"
             android:label="@string/title_activity_message" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.prgrmmr.hermes.MessageListActivity" />
+        </activity>
+        <activity
+            android:name="org.prgrmmr.hermes.MessageListActivity"
+            android:label="@string/title_activity_message_list" >
         </activity>
     </application>
 

@@ -6,37 +6,36 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class HermesDatabase {
-	
+
 	private static final int DATABASE_VERSION = 1;
 	private static final String TAG = "HermesDatabase.db";
 	private static final String DATABASE_NAME = "hermes";
-	
+
 	public static final String TABLE_MESSAGE = "message";
-	public static final String KEY_CONTENT = "content";
-	public static final String KEY_DATE = "date";
-	
+	public static final String COLUMN_ID = "content";
+	public static final String COLUMN_CONTENT = "content";
+	public static final String COLUMN_DATE = "date";
+
 
 	private static class HermesOpenHelper extends SQLiteOpenHelper {
-		
-		private final Context mHelperContext;
+
 		private SQLiteDatabase mDatabase;
-		
-		private static final String MESSAGE_TABLE_CREATE = 
-				" CREATE TABLE " + TABLE_MESSAGE + " ( "
-				+ KEY_CONTENT + " TEXT, "
-				+ KEY_DATE + " INT);";
-				
+
+		private static final String MESSAGE_TABLE_CREATE =
+				" CREATE TABLE " + TABLE_MESSAGE +
+				" ( "  + COLUMN_ID + " integer primary key autoincrement, "
+				+ COLUMN_CONTENT + " text, "
+				+ COLUMN_DATE + " integer);";
+
 
 		HermesOpenHelper(Context context) {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
-			mHelperContext = context;
 		}
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			mDatabase = db;
-			mDatabase.execSQL(MESSAGE_TABLE_CREATE);
-			
+			db.execSQL(MESSAGE_TABLE_CREATE);
+
 		}
 
 		@Override
@@ -45,10 +44,10 @@ public class HermesDatabase {
                     + newVersion + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_MESSAGE);
             onCreate(db);
-			
+
 		}
-		
+
 		//TODO Create method to load all messages
-		
+
 	}
 }

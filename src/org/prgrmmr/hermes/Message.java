@@ -24,15 +24,15 @@ public class Message {
 		this.content = content;
 	}
 
-	public Date getDate() {
-		return date;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	// Will be used by the ArrayAdapter in the ListView
+    // Will be used by the ArrayAdapter in the ListView
 	@Override
 	public String toString() {
 		return content;

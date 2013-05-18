@@ -1,46 +1,43 @@
 package org.prgrmmr.hermes;
 
+import java.util.List;
+
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.List;
-
-public class MessageListActivity extends Activity {
+public class MessageListActivity extends ListActivity {
 
     private MessageDataSource datasource;
-    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_list);
-        listView = (ListView) findViewById(R.id.messageListView);
 
         datasource = new MessageDataSource(this);
         datasource.open();
 
         List<Message> values = datasource.getAllMessages();
+        
+        datasource.close();
 
-        ArrayAdapter<Message> adapter = new ArrayAdapter<Message>(this, R.layout.activity_message, R.id.message, values);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String message = ((TextView) view).getText().toString();
+        ArrayAdapter<Message> adapter = new ArrayAdapter<Message>(this, R.layout.list_item , values);
+        setListAdapter(adapter);
 
-                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
-                intent.putExtra("msg", message);
-                startActivity(intent);
-            }
-        });
-
+    }
+    
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+    	String message = ((TextView) v).getText().toString();
+        Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+        intent.putExtra("msg", message);
+        startActivity(intent);
     }
 
 

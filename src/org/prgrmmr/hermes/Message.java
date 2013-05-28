@@ -4,25 +4,25 @@ import java.util.Date;
 
 public class Message {
 
-	private long id;
-	private String content;
-	private Date date;
+    private long id;
+    private String content;
+    private Date date;
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public Date getDate() {
         return date;
@@ -33,8 +33,8 @@ public class Message {
     }
 
     // Will be used by the ArrayAdapter in the ListView
-	@Override
-	public String toString() {
-		return content;
-	}
+    @Override
+    public String toString() {
+        return content;
+    }
 }

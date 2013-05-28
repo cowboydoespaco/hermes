@@ -24,19 +24,20 @@ public class MessageListActivity extends ListActivity {
         datasource.open();
 
         List<Message> values = datasource.getAllMessages();
-        
+
         datasource.close();
 
         ArrayAdapter<Message> adapter = new ArrayAdapter<Message>(this, R.layout.list_item , values);
         setListAdapter(adapter);
 
     }
-    
+
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-    	String message = ((TextView) v).getText().toString();
+        String message = ((TextView) v).getText().toString();
         Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
         intent.putExtra("msg", message);
+        intent.putExtra("forceReturn", false);
         startActivity(intent);
     }
 

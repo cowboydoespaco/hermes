@@ -48,10 +48,20 @@ public class MessageActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.menu_show_id:
+            case R.id.menu_message_show_id:
                 Intent mainIntent = new Intent(this, MainActivity.class);
                 startActivity(mainIntent);
                 return true;
+
+            case R.id.menu_message_delete:
+                long id = getIntent().getLongExtra("id", -1);
+                if (id != -1) {
+                    MessageDataSource.deleteMessage(getApplicationContext(), id);
+                    Intent messageListIntent = new Intent(this, MessageListActivity.class);
+                    startActivity(messageListIntent);
+                }
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

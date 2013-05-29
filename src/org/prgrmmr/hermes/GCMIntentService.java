@@ -29,7 +29,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     protected void onMessage(Context context, Intent intent) {
         Log.d(MainActivity.TAG, "Message Received: "+ intent.getStringExtra("message"));
         String msg = intent.getStringExtra("message");
-        saveMessage(context, msg);
+        MessageDataSource.saveMessage(context, msg);
         NotificationManager manager = (NotificationManager) context
             .getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = prepareNotification(context, msg);
@@ -53,13 +53,6 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected boolean onRecoverableError(Context context, String errorId) {
         return false;
-    }
-
-    private void saveMessage(Context context, String msg) {
-        MessageDataSource dataSource = new MessageDataSource(context);
-        dataSource.open();
-        dataSource.createMessage(msg, new Date());
-        dataSource.close();
     }
 
     private Notification prepareNotification(Context context, String msg) {

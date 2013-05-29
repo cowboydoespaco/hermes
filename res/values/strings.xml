@@ -3,7 +3,8 @@
 
     <string name="app_name">Hermes</string>
     <string name="unregistered">Unregistered!</string>
-    <string name="menu_show_id">Show Registered ID</string>
+    <string name="menu_message_show_id">Show Registered ID</string>
+    <string name="menu_message_delete">Delete Message</string>
     <string name="waitcomms">Awaiting communications..</string>
     <string name="title_activity_message">Hermes</string>
     <string name="title_activity_message_list">MessageListActivity</string>

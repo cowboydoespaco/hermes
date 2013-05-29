@@ -30,7 +30,7 @@ public class MessageDataSource {
         dbHelper.close();
     }
 
-    public Message createMessage(String message, Date date) {
+    private Message create(String message, Date date) {
         ContentValues values = new ContentValues();
         values.put(HermesOpenHelper.COLUMN_CONTENT, message);
         values.put(HermesOpenHelper.COLUMN_DATE, date.getTime());
@@ -45,14 +45,20 @@ public class MessageDataSource {
         return newMessage;
     }
 
-    public void deleteMessage(Message message) {
+    private void delete(Message message) {
         long id = message.getId();
         System.out.println("Message deleted with id: " + id);
         database.delete(HermesOpenHelper.TABLE_MESSAGE, HermesOpenHelper.COLUMN_ID
                 + " = " + id, null);
     }
 
-    public List<Message> getAllMessages() {
+    private void delete(Long id) {
+        System.out.println("Message deleted with id: " + id);
+        database.delete(HermesOpenHelper.TABLE_MESSAGE, HermesOpenHelper.COLUMN_ID
+                + " = " + id, null);
+    }
+
+    private List<Message> getAllMessages() {
         List<Message> messages = new ArrayList<Message>();
 
         Cursor cursor = database.query(HermesOpenHelper.TABLE_MESSAGE,
@@ -74,5 +80,27 @@ public class MessageDataSource {
         message.setContent(cursor.getString(1));
         message.setDate(new Date(cursor.getLong(2)));
         return message;
+    }
+
+    public static void saveMessage(Context context, String msg) {
+        MessageDataSource dataSource = new MessageDataSource(context);
+        dataSource.open();
+        dataSource.create(msg, new Date());
+        dataSource.close();
+    }
+
+    public static void deleteMessage(Context context, long id) {
+        MessageDataSource dataSource = new MessageDataSource(context);
+        dataSource.open();
+        dataSource.delete(id);
+        dataSource.close();
+    }
+
+    public static List<Message> getAllMessages(Context context) {
+        MessageDataSource dataSource = new MessageDataSource(context);
+        dataSource.open();
+        List<Message> messages = dataSource.getAllMessages();
+        dataSource.close();
+        return messages;
     }
 }

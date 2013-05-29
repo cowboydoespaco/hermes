@@ -17,27 +17,31 @@ public class MessageListActivity extends ListActivity {
     private MessageDataSource datasource;
     List<Message> values;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        datasource = new MessageDataSource(this);
-        datasource.open();
-
-        values = datasource.getAllMessages();
-
-        datasource.close();
+    protected void populateListView() {
+        values = MessageDataSource.getAllMessages(getApplicationContext());
 
         ArrayAdapter<Message> adapter = new ArrayAdapter<Message>(this, R.layout.list_item , values);
         setListAdapter(adapter);
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        populateListView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        populateListView();
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        String message = values.get(position).getContent();
+        Message message = values.get(position);
         Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
-        intent.putExtra("msg", message);
+        intent.putExtra("id", message.getId());
+        intent.putExtra("msg", message.getContent());
         intent.putExtra("forceReturn", false);
         startActivity(intent);
     }

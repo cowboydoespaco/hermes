@@ -56,7 +56,7 @@ public class MessageDataSource {
         List<Message> messages = new ArrayList<Message>();
 
         Cursor cursor = database.query(HermesOpenHelper.TABLE_MESSAGE,
-                allColumns, null, null, null, null, null);
+                allColumns, null, null, null, null, "date DESC");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

@@ -1,5 +1,6 @@
 package org.prgrmmr.hermes;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Message {
@@ -35,6 +36,6 @@ public class Message {
     // Will be used by the ArrayAdapter in the ListView
     @Override
     public String toString() {
-        return content;
+        return new SimpleDateFormat("dd/MM/yy HH:mm").format(date);
     }
 }

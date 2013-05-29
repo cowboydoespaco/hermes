@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class MessageListActivity extends ListActivity {
 
     private MessageDataSource datasource;
+    List<Message> values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class MessageListActivity extends ListActivity {
         datasource = new MessageDataSource(this);
         datasource.open();
 
-        List<Message> values = datasource.getAllMessages();
+        values = datasource.getAllMessages();
 
         datasource.close();
 
@@ -34,7 +35,7 @@ public class MessageListActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        String message = ((TextView) v).getText().toString();
+        String message = values.get(position).getContent();
         Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
         intent.putExtra("msg", message);
         intent.putExtra("forceReturn", false);

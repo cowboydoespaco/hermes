@@ -55,7 +55,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     private Notification prepareNotification(Context context, String msg) {
         long when = System.currentTimeMillis();
-        Notification notification = new Notification(R.drawable.ic_stat_cloud, msg,
+        Notification notification = new Notification(android.R.drawable.stat_notify_chat, msg,
             when);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
 

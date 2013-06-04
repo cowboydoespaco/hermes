@@ -57,8 +57,7 @@ public class MessageActivity extends Activity {
                 long id = getIntent().getLongExtra("id", -1);
                 if (id != -1) {
                     MessageDataSource.deleteMessage(getApplicationContext(), id);
-                    Intent messageListIntent = new Intent(this, MessageListActivity.class);
-                    startActivity(messageListIntent);
+                    this.finish();
                 }
                 return true;
 

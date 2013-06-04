@@ -16,8 +16,6 @@ public class HermesOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CONTENT = "content";
     public static final String COLUMN_DATE = "date";
 
-    private SQLiteDatabase mDatabase;
-
     private static final String MESSAGE_TABLE_CREATE =
             " CREATE TABLE " + TABLE_MESSAGE +
             " ( "  + COLUMN_ID + " integer primary key autoincrement, "

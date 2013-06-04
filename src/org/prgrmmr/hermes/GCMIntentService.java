@@ -11,8 +11,6 @@ import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
 
-import java.util.Date;
-
 public class GCMIntentService extends GCMBaseIntentService {
 
     public GCMIntentService() {

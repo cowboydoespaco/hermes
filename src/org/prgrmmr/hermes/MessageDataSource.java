@@ -95,6 +95,13 @@ public class MessageDataSource {
         dataSource.delete(id);
         dataSource.close();
     }
+    
+    public static void deleteMessage(Context context, Message message) {
+        MessageDataSource dataSource = new MessageDataSource(context);
+        dataSource.open();
+        dataSource.delete(message);
+        dataSource.close();
+    }
 
     public static List<Message> getAllMessages(Context context) {
         MessageDataSource dataSource = new MessageDataSource(context);

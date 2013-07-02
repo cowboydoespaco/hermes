@@ -1,6 +1,8 @@
 package org.prgrmmr.hermes;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -10,16 +12,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 public class MessageListActivity extends ListActivity {
 
-    List<Message> values;
+    List<Message> messages;
 
     protected void populateListView() {
-        values = MessageDataSource.getAllMessages(getApplicationContext());
+        messages = MessageDataSource.getAllMessages(getApplicationContext());
 
-        ArrayAdapter<Message> adapter = new ArrayAdapter<Message>(this, R.layout.list_item , values);
+        ArrayList<Map<String, String>> mapList = buildMapList(messages);
+
+        String[] data = { "sender", "date" ,"message" }; //these must be in order
+        int[] views = { R.id.txtSender, R.id.txtDate, R.id.txtPreviewText };
+
+        SimpleAdapter adapter = new SimpleAdapter(this, mapList, R.layout.list_item , data, views);
         setListAdapter(adapter);
+    }
+
+    private ArrayList<Map<String, String>> buildMapList(List<Message> messages) {
+        return null; //TODO
     }
 
     @Override
@@ -36,7 +48,7 @@ public class MessageListActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Message message = values.get(position);
+        Message message = messages.get(position);
         Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
         intent.putExtra("id", message.getId());
         intent.putExtra("msg", message.getContent());

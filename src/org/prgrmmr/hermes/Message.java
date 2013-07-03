@@ -33,9 +33,13 @@ public class Message {
         this.date = date;
     }
 
+    public String getFormattedDate() {
+        return new SimpleDateFormat("dd/MM/yy - HH:mm").format(date);
+    }
+
     // Will be used by the ArrayAdapter in the ListView
     @Override
     public String toString() {
-        return new SimpleDateFormat("dd/MM/yy HH:mm").format(date);
+        return getFormattedDate();
     }
 }

@@ -1,12 +1,15 @@
 package org.prgrmmr.hermes;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,19 +22,30 @@ public class MessageListActivity extends ListActivity {
     List<Message> messages;
 
     protected void populateListView() {
-        messages = MessageDataSource.getAllMessages(getApplicationContext());
-
-        ArrayList<Map<String, String>> mapList = buildMapList(messages);
-
-        String[] data = { "sender", "date" ,"message" }; //these must be in order
+        String[] data = { "sender", "date", "messageContent" }; //these must be in order
         int[] views = { R.id.txtSender, R.id.txtDate, R.id.txtPreviewText };
+
+        messages = MessageDataSource.getAllMessages(getApplicationContext());
+        ArrayList<Map<String, String>> mapList = buildMapList(messages);
 
         SimpleAdapter adapter = new SimpleAdapter(this, mapList, R.layout.list_item , data, views);
         setListAdapter(adapter);
     }
 
     private ArrayList<Map<String, String>> buildMapList(List<Message> messages) {
-        return null; //TODO
+        ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        for (Message message : messages) {
+            list.add(createMap("Anonymous", message.getFormattedDate(), message.getContent()));
+        }
+        return list;
+    }
+
+    private HashMap<String, String> createMap(String sender, String date, String messageContent) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("sender", sender);
+        map.put("date", date);
+        map.put("messageContent", messageContent);
+        return map;
     }
 
     @Override

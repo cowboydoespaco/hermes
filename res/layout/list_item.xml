@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="45dp"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
 
@@ -11,6 +11,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/txtPreviewText"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"/>
 
@@ -20,8 +22,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="data"
             android:id="@+id/txtDate"
-            android:layout_above="@+id/txtPreviewText"
-            android:layout_alignRight="@+id/txtPreviewText"/>
+            android:layout_alignParentTop="true" android:layout_alignParentRight="true"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -29,7 +30,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
             android:id="@+id/txtSender"
-            android:layout_above="@+id/txtPreviewText"
-            android:layout_alignParentLeft="true"/>
+            android:ellipsize="end"
+            android:layout_alignParentTop="true" android:layout_alignParentLeft="true"/>
 
 </RelativeLayout>

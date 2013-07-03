@@ -1,25 +1,51 @@
 package org.prgrmmr.hermes;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 public class MessageListActivity extends ListActivity {
 
-    List<Message> values;
+    List<Message> messages;
 
     protected void populateListView() {
-        values = MessageDataSource.getAllMessages(getApplicationContext());
+        String[] data = { "sender", "date", "messageContent" }; //these must be in order
+        int[] views = { R.id.txtSender, R.id.txtDate, R.id.txtPreviewText };
 
-        ArrayAdapter<Message> adapter = new ArrayAdapter<Message>(this, R.layout.list_item , values);
+        messages = MessageDataSource.getAllMessages(getApplicationContext());
+        ArrayList<Map<String, String>> mapList = buildMapList(messages);
+
+        SimpleAdapter adapter = new SimpleAdapter(this, mapList, R.layout.list_item , data, views);
         setListAdapter(adapter);
+    }
+
+    private ArrayList<Map<String, String>> buildMapList(List<Message> messages) {
+        ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        for (Message message : messages) {
+            list.add(createMap("Anonymous", message.getFormattedDate(), message.getContent()));
+        }
+        return list;
+    }
+
+    private HashMap<String, String> createMap(String sender, String date, String messageContent) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("sender", sender);
+        map.put("date", date);
+        map.put("messageContent", messageContent);
+        return map;
     }
 
     @Override
@@ -36,7 +62,7 @@ public class MessageListActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Message message = values.get(position);
+        Message message = messages.get(position);
         Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
         intent.putExtra("id", message.getId());
         intent.putExtra("msg", message.getContent());
